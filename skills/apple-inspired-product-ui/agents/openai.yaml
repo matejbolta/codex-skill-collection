@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apple-Inspired Product UI"
+  short_description: "Design calm, clear, deeply crafted product interfaces"
+  default_prompt: "Use $apple-inspired-product-ui to redesign this interface with calm hierarchy, familiar controls, and verified responsive behavior."

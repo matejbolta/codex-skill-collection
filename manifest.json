@@ -1,0 +1,135 @@
+{
+  "collection": "Matej's Codex Skill Collection",
+  "ref": "main",
+  "repo_url": "https://github.com/matejbolta/codex-skill-collection",
+  "skills": [
+    {
+      "description": "Design or refine product interfaces with Apple-inspired hierarchy, familiarity, restraint, responsive craft, and accessibility. Use for UI/UX implementation or redesign when a calm Apple-platform feel is desired; do not use for copying Apple product trade dress or generic brand-identity work.",
+      "files": [
+        {
+          "bytes": 6817,
+          "path": "SKILL.md",
+          "sha256": "d373ad0f94f2862f2bbe3a91e44b94ad2c9a76ab943a0f06afcf7aad2a5a1d64"
+        },
+        {
+          "bytes": 284,
+          "path": "agents/openai.yaml",
+          "sha256": "3ed7525806992fce5986163396f76f7c5a5e3725192b025ec24e8736f758870e"
+        },
+        {
+          "bytes": 11944,
+          "path": "references/design-language.md",
+          "sha256": "ef112287037ff8520f2961892b2274927550574d2af7908fc52271ef5067dfcb"
+        }
+      ],
+      "name": "apple-inspired-product-ui",
+      "path": "skills/apple-inspired-product-ui"
+    },
+    {
+      "description": "Visually inspect, test, and iterate on browser-rendered interfaces in a real browser. Use for UI/UX implementation or review, layout and styling changes, responsive behavior, browser-extension pages, interaction states, and local web-app visual verification; do not use for backend-only or otherwise nonvisual work.",
+      "files": [
+        {
+          "bytes": 4853,
+          "path": "SKILL.md",
+          "sha256": "fe3c3930c0f98c7f108944d3ef675da0be902c59e6dd545fafe3f516a799dc40"
+        },
+        {
+          "bytes": 250,
+          "path": "agents/openai.yaml",
+          "sha256": "0c639e94633c139276c0a69d12ec98f7a59fbf1daa0300766e86e10315a614f2"
+        }
+      ],
+      "name": "browser-visual-qa",
+      "path": "skills/browser-visual-qa"
+    },
+    {
+      "description": "Set up a previously untracked project, explicitly audit or migrate Git governance, create or repair a durable project-continuity system, or prepare an explicit release/version. Do not use for ordinary implementation, bug fixes, explanations, or routine task completion.",
+      "files": [
+        {
+          "bytes": 3485,
+          "path": "SKILL.md",
+          "sha256": "cc1e378e4ebdd77596d643b16ac69d9677dfb3a499549a34dfc89aca2d35b2f4"
+        },
+        {
+          "bytes": 127,
+          "path": "agents/openai.yaml",
+          "sha256": "1d0300024d40381fe7a7ccabaab92c3d65ee176c8b324332963cb4d0fc1620ab"
+        },
+        {
+          "bytes": 609,
+          "path": "assets/templates/records/AGENTS.md",
+          "sha256": "d1667774e097dbfffdfed0cc909038aa896bd49cf1b68ad10d1cbe7995c27815"
+        },
+        {
+          "bytes": 485,
+          "path": "assets/templates/records/HANDOFF.md",
+          "sha256": "88c6ddc440ee927c7ff03b110637bb4a81756d0672a2bdfd5455cb61a7058afb"
+        },
+        {
+          "bytes": 321,
+          "path": "assets/templates/records/README.md",
+          "sha256": "68da28612b887642248a9409f86b1fa5a8e50aaa19373db181f0429ac98946b1"
+        },
+        {
+          "bytes": 537,
+          "path": "assets/templates/software/AGENTS.md",
+          "sha256": "e88a49764530e86e4242605c7ea11caa14b668806c1d7e3a8f3dc2e24de30571"
+        },
+        {
+          "bytes": 468,
+          "path": "assets/templates/software/CHANGELOG.md",
+          "sha256": "1becfbb12eb2c05366a0c1db727f69ee5bcc797b03432c6c0ea36585ce88a576"
+        },
+        {
+          "bytes": 634,
+          "path": "assets/templates/software/HANDOFF.md",
+          "sha256": "5eb69b410eb47de25bd88e11de7952e32f473ad8d8198bbbe44b26cb458c3ba6"
+        },
+        {
+          "bytes": 382,
+          "path": "assets/templates/software/README.md",
+          "sha256": "ed3ca7498f25e5e2de8ba9d161c7cf3ae83aae6195cf8b87d6e39525394324df"
+        },
+        {
+          "bytes": 5728,
+          "path": "references/project-standard.md",
+          "sha256": "793c616127b0ff8781ee876dfdeb9346934b7835d569a61418d957f4f793d912"
+        },
+        {
+          "bytes": 5224,
+          "path": "scripts/bootstrap_project.py",
+          "sha256": "8d2d0d17c302c248c2453ea262e6f58d0db07eea60962971f178118d678fdae2"
+        },
+        {
+          "bytes": 6872,
+          "path": "scripts/project_audit.py",
+          "sha256": "3a14fc7419c7b660ed79d309c211ab35b96438a53c37d6e33f997863d83fe2b0"
+        }
+      ],
+      "name": "project-governance",
+      "path": "skills/project-governance"
+    },
+    {
+      "description": "Package local Codex skills into a clean, validated, shareable collection with GitHub-compatible paths, recipient install prompts, and an optional zip archive. Use when preparing skills for another Codex user; do not publish, push, create remotes, or overwrite installed skills without explicit authorization.",
+      "files": [
+        {
+          "bytes": 3624,
+          "path": "SKILL.md",
+          "sha256": "c21ab14826ccf8f0632f569862bd1982ec17f2d7d5e3a5524fd6bb3f2c4f95fa"
+        },
+        {
+          "bytes": 265,
+          "path": "agents/openai.yaml",
+          "sha256": "0fcd6f5909656942cd814d44b4e775bc568ba4efc7fc28e0ecdcd56133d80f28"
+        },
+        {
+          "bytes": 13474,
+          "path": "scripts/package_skills.py",
+          "sha256": "6243345d2fbdc5751ca481fae0c8f845b988afb65306a311c146d11d4d87871e"
+        }
+      ],
+      "name": "skill-publisher",
+      "path": "skills/skill-publisher"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Project Governance"
+  short_description: "Keep Git, versions, changelogs, and handoffs consistent"

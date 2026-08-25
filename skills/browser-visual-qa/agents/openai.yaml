@@ -1,0 +1,4 @@
+interface:
+  display_name: "Browser Visual QA"
+  short_description: "Test and iterate on rendered browser interfaces"
+  default_prompt: "Use $browser-visual-qa to inspect this UI in a real browser, make the requested change, and verify it visually."
