@@ -3,13 +3,13 @@
 ## Current state
 
 This document establishes the first standardized takeover baseline for
-`{{PROJECT_NAME}}` on {{DATE}}.
+`{{PROJECT_NAME}}` on {{DATE}}. The current version is `{{VERSION}}`.
 
 ## Orientation
 
-Read `README.md` for product and development instructions and `AGENTS.md` for
-mandatory project rules. Inspect the implementation and tests before relying on
-assumptions not recorded there.
+Read `README.md` for product and development instructions, `AGENTS.md` for
+mandatory project rules, and `CHANGELOG.md` for the release record. Inspect the
+implementation and tests before relying on assumptions not recorded there.
 
 ## Verification
 

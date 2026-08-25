@@ -11,6 +11,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Establish an honest version-control and documentation baseline for the
-  existing project. Work before this baseline may not have exact source
+- Establish an honest version-control, release, and documentation baseline for
+  the existing project. Work before this baseline may not have exact source
   snapshots.

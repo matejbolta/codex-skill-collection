@@ -1,5 +1,7 @@
 # Recipient Install Prompts
 
+Replace `OWNER/REPO` first if the collection has not yet been published.
+
 ## Install everything with another Codex agent
 
 ```text

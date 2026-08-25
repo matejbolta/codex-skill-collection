@@ -1,113 +1,340 @@
 {
   "collection": "Matej's Codex Skill Collection",
+  "files": [
+    {
+      "bytes": 33,
+      "path": ".gitignore",
+      "sha256": "1f398327758bed124c02230b02344a5bd7a043a707b8270b4a939997a6edf488"
+    },
+    {
+      "bytes": 2955,
+      "path": "INSTALL_PROMPTS.md",
+      "sha256": "27ef2c1e8dc844679823d7b32518cab332926e0d90f8ea7b34b2bc28edb1f08a"
+    },
+    {
+      "bytes": 2787,
+      "path": "README.md",
+      "sha256": "a220eb7cd051aab56f7093a96425d66d253561954f901eaf606e6724417c5958"
+    },
+    {
+      "bytes": 12969,
+      "path": "skills/apple-inspired-product-ui/SKILL.md",
+      "sha256": "e4d90fbb779e1db38c166634b0edbea1e6dbf4bfdfb86ebdfb4f4afe2f8f0866"
+    },
+    {
+      "bytes": 331,
+      "path": "skills/apple-inspired-product-ui/agents/openai.yaml",
+      "sha256": "e93add31929d12c070eda79cea9b1f06b110b69d37a1a6c54d18983aaeebfd45"
+    },
+    {
+      "bytes": 17795,
+      "path": "skills/apple-inspired-product-ui/references/design-language.md",
+      "sha256": "849c30de4a80e0944acc6a701c643c902eeba95b3bc0bac53353d68e1ca4a93e"
+    },
+    {
+      "bytes": 23924,
+      "path": "skills/apple-inspired-product-ui/references/iphone-ios-product-language.md",
+      "sha256": "201cd108fb4df7ab496b96addba72126c335556d570a09a5afe4c0b62b5e264c"
+    },
+    {
+      "bytes": 22597,
+      "path": "skills/apple-inspired-product-ui/references/macos-product-language.md",
+      "sha256": "ca3b3297c22f6a177b9bdec58b73a22b7f7d4199065056ca8069f09c3ea91033"
+    },
+    {
+      "bytes": 13703,
+      "path": "skills/apple-inspired-product-ui/references/research-foundations.md",
+      "sha256": "019f4c43dd1b26d38a420fd2bfe993bd0b91d9b97e36b46db61296b10b1c97c7"
+    },
+    {
+      "bytes": 7427,
+      "path": "skills/browser-visual-qa/SKILL.md",
+      "sha256": "d7c620dc7e132cac6edecaaa5d69d37febc78867e96b168cb79c3995bccdfdd0"
+    },
+    {
+      "bytes": 269,
+      "path": "skills/browser-visual-qa/agents/openai.yaml",
+      "sha256": "48e913502611388b85d43194146a5aa9dd803b1e343a6987d921867eaeb38aa8"
+    },
+    {
+      "bytes": 4702,
+      "path": "skills/dev-workspace-organizer/SKILL.md",
+      "sha256": "12123033fa6eb71d2ea2fb51bc33982c1bdb2c5b94d0afb5e858d2769f020363"
+    },
+    {
+      "bytes": 274,
+      "path": "skills/dev-workspace-organizer/agents/openai.yaml",
+      "sha256": "b390a6276f7eb594b85e9e55cd0eafc7beb3ec4c89c722837647e56b09f9cba5"
+    },
+    {
+      "bytes": 4351,
+      "path": "skills/dev-workspace-organizer/references/layout-pattern.md",
+      "sha256": "e2367e3e50a75e75537501ad528794b8b42a7866c8e17b926206cae5811f7946"
+    },
+    {
+      "bytes": 9847,
+      "path": "skills/dev-workspace-organizer/scripts/workspace_inventory.py",
+      "sha256": "b7c337a1be6762e0501d2d92562f1a229d7a600d70614170f3c9751548b16987"
+    },
+    {
+      "bytes": 5233,
+      "path": "skills/github-safe-publish/SKILL.md",
+      "sha256": "1d23cb116a40434bf165ad801c0d9b62cc3e3077505faeedb978f7f87fb95728"
+    },
+    {
+      "bytes": 268,
+      "path": "skills/github-safe-publish/agents/openai.yaml",
+      "sha256": "0560488bfcd6296d571ef454995d09d63cc7b34312ef277ff773d7deba34f850"
+    },
+    {
+      "bytes": 7073,
+      "path": "skills/github-safe-publish/references/security-review.md",
+      "sha256": "02018839fcb9b0b0838bbd863ad372997bb00a624428398a12fe3a6a4201488d"
+    },
+    {
+      "bytes": 23462,
+      "path": "skills/github-safe-publish/scripts/prepublish_audit.py",
+      "sha256": "6224f1e470d6065da55401809becea2a459656f3f04984ac09515745737f21dd"
+    },
+    {
+      "bytes": 4583,
+      "path": "skills/project-governance/SKILL.md",
+      "sha256": "bcd0bfe0bc7417e940ddedc5638b05ee8df7d8480875b6dc522f766d995ad081"
+    },
+    {
+      "bytes": 298,
+      "path": "skills/project-governance/agents/openai.yaml",
+      "sha256": "d213e549f2dea651e08aff64a5d40682b328c9ceba8fb8d4dc1bad151c8a7045"
+    },
+    {
+      "bytes": 609,
+      "path": "skills/project-governance/assets/templates/records/AGENTS.md",
+      "sha256": "d1667774e097dbfffdfed0cc909038aa896bd49cf1b68ad10d1cbe7995c27815"
+    },
+    {
+      "bytes": 485,
+      "path": "skills/project-governance/assets/templates/records/HANDOFF.md",
+      "sha256": "88c6ddc440ee927c7ff03b110637bb4a81756d0672a2bdfd5455cb61a7058afb"
+    },
+    {
+      "bytes": 321,
+      "path": "skills/project-governance/assets/templates/records/README.md",
+      "sha256": "68da28612b887642248a9409f86b1fa5a8e50aaa19373db181f0429ac98946b1"
+    },
+    {
+      "bytes": 446,
+      "path": "skills/project-governance/assets/templates/software/AGENTS.md",
+      "sha256": "b7a91c957c5f6dfdf92ee98115a39e1969224f4ca15636873e188b12f8b19a38"
+    },
+    {
+      "bytes": 596,
+      "path": "skills/project-governance/assets/templates/software/HANDOFF.md",
+      "sha256": "24dbf551297702c4d62b7ae977bac85cbf5e072b9bd5c2211150267315218614"
+    },
+    {
+      "bytes": 300,
+      "path": "skills/project-governance/assets/templates/software/README.md",
+      "sha256": "db61143fd1b2d16cdfd2d9a6043cca85dd71bb60bcb235d9c9bb315a397ceba1"
+    },
+    {
+      "bytes": 662,
+      "path": "skills/project-governance/assets/templates/software-release/AGENTS.md",
+      "sha256": "d6ab207f94fa228f06f40e9466a7a9222131d17140976ba7c002417e05973e45"
+    },
+    {
+      "bytes": 478,
+      "path": "skills/project-governance/assets/templates/software-release/CHANGELOG.md",
+      "sha256": "afd7c0a550ed980d85e89a647acf1e12f9f56d12156c8b44d1bdda5e5d4519fb"
+    },
+    {
+      "bytes": 674,
+      "path": "skills/project-governance/assets/templates/software-release/HANDOFF.md",
+      "sha256": "24e18859b6b996f436c540c84f5ecb68c9e55480dad7692a5233c869bffe4bc1"
+    },
+    {
+      "bytes": 382,
+      "path": "skills/project-governance/assets/templates/software-release/README.md",
+      "sha256": "ed3ca7498f25e5e2de8ba9d161c7cf3ae83aae6195cf8b87d6e39525394324df"
+    },
+    {
+      "bytes": 2935,
+      "path": "skills/project-governance/references/inventory-schema.md",
+      "sha256": "18bdeb22a2b558fffe74a044baf80ca6d4b2ac1f1833d1dad0cefd8d6eca431c"
+    },
+    {
+      "bytes": 6899,
+      "path": "skills/project-governance/references/project-standard.md",
+      "sha256": "b30f209c8250235307889a48d674780865be756cec05217e0ae6f98f2ca564b4"
+    },
+    {
+      "bytes": 8601,
+      "path": "skills/project-governance/scripts/bootstrap_project.py",
+      "sha256": "14131d0e5a31401e428ccf26fbcc72e932a4cd4eb54a92be6e52ec058e7e26cc"
+    },
+    {
+      "bytes": 14564,
+      "path": "skills/project-governance/scripts/project_audit.py",
+      "sha256": "78a9979ff0f0fd80cb39e6d15778467c1cad3f49d5726db3a4ffeecdfb7d2fde"
+    },
+    {
+      "bytes": 4280,
+      "path": "skills/skill-publisher/SKILL.md",
+      "sha256": "7397c670010733462a211bbf9bcca64d1ae815c6811b12b4e5cd6cd3d2341fdd"
+    },
+    {
+      "bytes": 281,
+      "path": "skills/skill-publisher/agents/openai.yaml",
+      "sha256": "132abe0742054dba95a2f52e8c0dcbbd307bcee398e671527eda0ecf1d935112"
+    },
+    {
+      "bytes": 17894,
+      "path": "skills/skill-publisher/scripts/package_skills.py",
+      "sha256": "b71f0d0db5e20b87ef49209a880549cd5aebf65829518fb2c873bc899fcf3389"
+    }
+  ],
+  "manifest_excludes": [
+    "manifest.json"
+  ],
   "ref": "main",
   "repo_url": "https://github.com/matejbolta/codex-skill-collection",
+  "schema_version": 2,
   "skills": [
     {
-      "description": "Design or refine product interfaces with Apple-inspired hierarchy, familiarity, restraint, responsive craft, and accessibility. Use for UI/UX implementation or redesign when a calm Apple-platform feel is desired; do not use for copying Apple product trade dress or generic brand-identity work.",
+      "description": "Review, specify, or refine macOS, iPhone/iOS, or cross-platform product interfaces with Apple-inspired hierarchy, platform-native behavior, restraint, adaptive craft, and accessibility. Use when Apple-platform design discipline or a Mac- or iPhone-appropriate interaction model is desired; do not use to copy Apple trade dress or for generic brand-identity work.",
       "files": [
         {
-          "bytes": 6817,
+          "bytes": 12969,
           "path": "SKILL.md",
-          "sha256": "d373ad0f94f2862f2bbe3a91e44b94ad2c9a76ab943a0f06afcf7aad2a5a1d64"
+          "sha256": "e4d90fbb779e1db38c166634b0edbea1e6dbf4bfdfb86ebdfb4f4afe2f8f0866"
         },
         {
-          "bytes": 284,
+          "bytes": 331,
           "path": "agents/openai.yaml",
-          "sha256": "3ed7525806992fce5986163396f76f7c5a5e3725192b025ec24e8736f758870e"
+          "sha256": "e93add31929d12c070eda79cea9b1f06b110b69d37a1a6c54d18983aaeebfd45"
         },
         {
-          "bytes": 11944,
+          "bytes": 17795,
           "path": "references/design-language.md",
-          "sha256": "ef112287037ff8520f2961892b2274927550574d2af7908fc52271ef5067dfcb"
+          "sha256": "849c30de4a80e0944acc6a701c643c902eeba95b3bc0bac53353d68e1ca4a93e"
+        },
+        {
+          "bytes": 23924,
+          "path": "references/iphone-ios-product-language.md",
+          "sha256": "201cd108fb4df7ab496b96addba72126c335556d570a09a5afe4c0b62b5e264c"
+        },
+        {
+          "bytes": 22597,
+          "path": "references/macos-product-language.md",
+          "sha256": "ca3b3297c22f6a177b9bdec58b73a22b7f7d4199065056ca8069f09c3ea91033"
+        },
+        {
+          "bytes": 13703,
+          "path": "references/research-foundations.md",
+          "sha256": "019f4c43dd1b26d38a420fd2bfe993bd0b91d9b97e36b46db61296b10b1c97c7"
         }
       ],
+      "license_files": [],
       "name": "apple-inspired-product-ui",
-      "path": "skills/apple-inspired-product-ui"
+      "path": "skills/apple-inspired-product-ui",
+      "warnings": [
+        "no conventional license file found"
+      ]
     },
     {
       "description": "Visually inspect, test, and iterate on browser-rendered interfaces in a real browser. Use for UI/UX implementation or review, layout and styling changes, responsive behavior, browser-extension pages, interaction states, and local web-app visual verification; do not use for backend-only or otherwise nonvisual work.",
       "files": [
         {
-          "bytes": 4853,
+          "bytes": 7427,
           "path": "SKILL.md",
-          "sha256": "fe3c3930c0f98c7f108944d3ef675da0be902c59e6dd545fafe3f516a799dc40"
+          "sha256": "d7c620dc7e132cac6edecaaa5d69d37febc78867e96b168cb79c3995bccdfdd0"
         },
         {
-          "bytes": 250,
+          "bytes": 269,
           "path": "agents/openai.yaml",
-          "sha256": "0c639e94633c139276c0a69d12ec98f7a59fbf1daa0300766e86e10315a614f2"
+          "sha256": "48e913502611388b85d43194146a5aa9dd803b1e343a6987d921867eaeb38aa8"
         }
       ],
+      "license_files": [],
       "name": "browser-visual-qa",
-      "path": "skills/browser-visual-qa"
+      "path": "skills/browser-visual-qa",
+      "warnings": [
+        "no conventional license file found"
+      ]
     },
     {
       "description": "Plan, initialize, or safely reorganize a multi-project development workspace into durable top-level categories without crossing repository boundaries. Use for layouts such as projects, tools, experiments, skills, and misc; do not use for one repository's internal structure.",
       "files": [
         {
-          "bytes": 3781,
+          "bytes": 4702,
           "path": "SKILL.md",
-          "sha256": "ca7e7169ea1f05cdfe7574e6e06c1fb7fe2a31ef4a7942d9f5a3f82dd4315fe6"
+          "sha256": "12123033fa6eb71d2ea2fb51bc33982c1bdb2c5b94d0afb5e858d2769f020363"
         },
         {
-          "bytes": 228,
+          "bytes": 274,
           "path": "agents/openai.yaml",
-          "sha256": "eb3fdcc2d0957eb5bd18ab0b26a0d1e28fe0576916460696230dde43ef34bfb0"
+          "sha256": "b390a6276f7eb594b85e9e55cd0eafc7beb3ec4c89c722837647e56b09f9cba5"
         },
         {
-          "bytes": 3232,
+          "bytes": 4351,
           "path": "references/layout-pattern.md",
-          "sha256": "150f7407cce2f26f0bd2a36cd12b91ec4de900fa26ec9bb136112614dfd9a2b5"
+          "sha256": "e2367e3e50a75e75537501ad528794b8b42a7866c8e17b926206cae5811f7946"
         },
         {
-          "bytes": 5941,
+          "bytes": 9847,
           "path": "scripts/workspace_inventory.py",
-          "sha256": "a7898ad4683db49b5a48d9d4faa5917adc903e2c022410ebba2a1d33a5c8fce8"
+          "sha256": "b7c337a1be6762e0501d2d92562f1a229d7a600d70614170f3c9751548b16987"
         }
       ],
+      "license_files": [],
       "name": "dev-workspace-organizer",
-      "path": "skills/dev-workspace-organizer"
+      "path": "skills/dev-workspace-organizer",
+      "warnings": [
+        "no conventional license file found"
+      ]
     },
     {
       "description": "Audit a local Git repository for secrets, personal data, risky history, and publication readiness, then create and push a GitHub remote only with explicit authorization. Use for first publication or a deliberate privacy/security review; do not use for routine pushes to an already-reviewed remote.",
       "files": [
         {
-          "bytes": 4598,
+          "bytes": 5233,
           "path": "SKILL.md",
-          "sha256": "b95186e1fc78e4f4b0bb748ed2f5d3c1d6f964b8791566d12d053e1f58ba2de6"
+          "sha256": "1d23cb116a40434bf165ad801c0d9b62cc3e3077505faeedb978f7f87fb95728"
         },
         {
-          "bytes": 231,
+          "bytes": 268,
           "path": "agents/openai.yaml",
-          "sha256": "fa2da0c37f3aaa7f97738fa6169976e23e39f0499ac1c32676b73ab86fcf7cac"
+          "sha256": "0560488bfcd6296d571ef454995d09d63cc7b34312ef277ff773d7deba34f850"
         },
         {
-          "bytes": 6300,
+          "bytes": 7073,
           "path": "references/security-review.md",
-          "sha256": "1c89a5178c8dd332fb4977b58574efcb80550c823af15c05106ee94f155fb37b"
+          "sha256": "02018839fcb9b0b0838bbd863ad372997bb00a624428398a12fe3a6a4201488d"
         },
         {
-          "bytes": 15704,
+          "bytes": 23462,
           "path": "scripts/prepublish_audit.py",
-          "sha256": "3d6b6febd17c1f9591e06328f52accac988bc97754afa743109ff32a57307278"
+          "sha256": "6224f1e470d6065da55401809becea2a459656f3f04984ac09515745737f21dd"
         }
       ],
+      "license_files": [],
       "name": "github-safe-publish",
-      "path": "skills/github-safe-publish"
+      "path": "skills/github-safe-publish",
+      "warnings": [
+        "no conventional license file found"
+      ]
     },
     {
       "description": "Set up a previously untracked project, explicitly audit or migrate Git governance, create or repair a durable project-continuity system, or prepare an explicit release/version. Do not use for ordinary implementation, bug fixes, explanations, or routine task completion.",
       "files": [
         {
-          "bytes": 3485,
+          "bytes": 4583,
           "path": "SKILL.md",
-          "sha256": "cc1e378e4ebdd77596d643b16ac69d9677dfb3a499549a34dfc89aca2d35b2f4"
+          "sha256": "bcd0bfe0bc7417e940ddedc5638b05ee8df7d8480875b6dc522f766d995ad081"
         },
         {
-          "bytes": 127,
+          "bytes": 298,
           "path": "agents/openai.yaml",
-          "sha256": "1d0300024d40381fe7a7ccabaab92c3d65ee176c8b324332963cb4d0fc1620ab"
+          "sha256": "d213e549f2dea651e08aff64a5d40682b328c9ceba8fb8d4dc1bad151c8a7045"
         },
         {
           "bytes": 609,
@@ -125,65 +352,93 @@
           "sha256": "68da28612b887642248a9409f86b1fa5a8e50aaa19373db181f0429ac98946b1"
         },
         {
-          "bytes": 537,
+          "bytes": 446,
           "path": "assets/templates/software/AGENTS.md",
-          "sha256": "e88a49764530e86e4242605c7ea11caa14b668806c1d7e3a8f3dc2e24de30571"
+          "sha256": "b7a91c957c5f6dfdf92ee98115a39e1969224f4ca15636873e188b12f8b19a38"
         },
         {
-          "bytes": 468,
-          "path": "assets/templates/software/CHANGELOG.md",
-          "sha256": "1becfbb12eb2c05366a0c1db727f69ee5bcc797b03432c6c0ea36585ce88a576"
-        },
-        {
-          "bytes": 634,
+          "bytes": 596,
           "path": "assets/templates/software/HANDOFF.md",
-          "sha256": "5eb69b410eb47de25bd88e11de7952e32f473ad8d8198bbbe44b26cb458c3ba6"
+          "sha256": "24dbf551297702c4d62b7ae977bac85cbf5e072b9bd5c2211150267315218614"
+        },
+        {
+          "bytes": 300,
+          "path": "assets/templates/software/README.md",
+          "sha256": "db61143fd1b2d16cdfd2d9a6043cca85dd71bb60bcb235d9c9bb315a397ceba1"
+        },
+        {
+          "bytes": 662,
+          "path": "assets/templates/software-release/AGENTS.md",
+          "sha256": "d6ab207f94fa228f06f40e9466a7a9222131d17140976ba7c002417e05973e45"
+        },
+        {
+          "bytes": 478,
+          "path": "assets/templates/software-release/CHANGELOG.md",
+          "sha256": "afd7c0a550ed980d85e89a647acf1e12f9f56d12156c8b44d1bdda5e5d4519fb"
+        },
+        {
+          "bytes": 674,
+          "path": "assets/templates/software-release/HANDOFF.md",
+          "sha256": "24e18859b6b996f436c540c84f5ecb68c9e55480dad7692a5233c869bffe4bc1"
         },
         {
           "bytes": 382,
-          "path": "assets/templates/software/README.md",
+          "path": "assets/templates/software-release/README.md",
           "sha256": "ed3ca7498f25e5e2de8ba9d161c7cf3ae83aae6195cf8b87d6e39525394324df"
         },
         {
-          "bytes": 5728,
+          "bytes": 2935,
+          "path": "references/inventory-schema.md",
+          "sha256": "18bdeb22a2b558fffe74a044baf80ca6d4b2ac1f1833d1dad0cefd8d6eca431c"
+        },
+        {
+          "bytes": 6899,
           "path": "references/project-standard.md",
-          "sha256": "793c616127b0ff8781ee876dfdeb9346934b7835d569a61418d957f4f793d912"
+          "sha256": "b30f209c8250235307889a48d674780865be756cec05217e0ae6f98f2ca564b4"
         },
         {
-          "bytes": 5224,
+          "bytes": 8601,
           "path": "scripts/bootstrap_project.py",
-          "sha256": "8d2d0d17c302c248c2453ea262e6f58d0db07eea60962971f178118d678fdae2"
+          "sha256": "14131d0e5a31401e428ccf26fbcc72e932a4cd4eb54a92be6e52ec058e7e26cc"
         },
         {
-          "bytes": 6872,
+          "bytes": 14564,
           "path": "scripts/project_audit.py",
-          "sha256": "3a14fc7419c7b660ed79d309c211ab35b96438a53c37d6e33f997863d83fe2b0"
+          "sha256": "78a9979ff0f0fd80cb39e6d15778467c1cad3f49d5726db3a4ffeecdfb7d2fde"
         }
       ],
+      "license_files": [],
       "name": "project-governance",
-      "path": "skills/project-governance"
+      "path": "skills/project-governance",
+      "warnings": [
+        "no conventional license file found"
+      ]
     },
     {
       "description": "Package local Codex skills into a clean, validated, shareable collection with GitHub-compatible paths, recipient install prompts, and an optional zip archive. Use when preparing skills for another Codex user; do not publish, push, create remotes, or overwrite installed skills without explicit authorization.",
       "files": [
         {
-          "bytes": 3624,
+          "bytes": 4280,
           "path": "SKILL.md",
-          "sha256": "c21ab14826ccf8f0632f569862bd1982ec17f2d7d5e3a5524fd6bb3f2c4f95fa"
+          "sha256": "7397c670010733462a211bbf9bcca64d1ae815c6811b12b4e5cd6cd3d2341fdd"
         },
         {
-          "bytes": 265,
+          "bytes": 281,
           "path": "agents/openai.yaml",
-          "sha256": "0fcd6f5909656942cd814d44b4e775bc568ba4efc7fc28e0ecdcd56133d80f28"
+          "sha256": "132abe0742054dba95a2f52e8c0dcbbd307bcee398e671527eda0ecf1d935112"
         },
         {
-          "bytes": 13474,
+          "bytes": 17894,
           "path": "scripts/package_skills.py",
-          "sha256": "6243345d2fbdc5751ca481fae0c8f845b988afb65306a311c146d11d4d87871e"
+          "sha256": "b71f0d0db5e20b87ef49209a880549cd5aebf65829518fb2c873bc899fcf3389"
         }
       ],
+      "license_files": [],
       "name": "skill-publisher",
-      "path": "skills/skill-publisher"
+      "path": "skills/skill-publisher",
+      "warnings": [
+        "no conventional license file found"
+      ]
     }
   ]
 }

@@ -1,4 +1,4 @@
 interface:
   display_name: "Skill Publisher"
   short_description: "Package and validate Codex skills for sharing"
-  default_prompt: "Use $skill-publisher to package these local Codex skills into a clean shareable collection with install prompts and a zip archive."
+  default_prompt: "Use $skill-publisher to package these local Codex skills into a validated local collection and archive without publishing or overwriting anything."

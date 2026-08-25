@@ -14,6 +14,29 @@ Apply improvements in this order:
 
 Later layers must not weaken earlier ones.
 
+## Share Principles, Not Platform Anatomy
+
+Apple platforms share purpose, agency, responsibility, familiarity, flexibility, simplicity, craft, and delight. They do not share one universal screen composition.
+
+The current HIG also frames the visual system through three connected ideas:
+
+- **Hierarchy:** functional controls and chrome must remain distinct from the content they operate on. Emphasis follows task importance rather than ornamental contrast.
+- **Harmony:** shape, insets, material, type, and motion relate to one another and to the containing device or window. Concentric geometry is a consequence of related containers, not a command to round every object.
+- **Consistency:** standard components preserve familiar anatomy and continuously adapt across sizes, displays, appearances, inputs, and accessibility settings. Consistency is behavioral before it is visual.
+
+| Dimension | macOS | iPhone/iOS |
+| --- | --- | --- |
+| Primary context | User-arranged workspace, often several apps and windows | Personal handheld scene, often one immediate task amid interruptions |
+| Dominant input | Precise pointer plus physical keyboard | Direct touch, virtual keyboard, voice, and device capabilities |
+| Navigation | Windows, menu commands, sidebar/list/detail, inspectors | Stable top-level tabs, navigation stack, sheets for scoped work |
+| Command model | Complete menu bar plus frequent toolbar subset and shortcuts | Visible current-view actions plus compact secondary menus |
+| Density | Comfortable information density for sustained work | Focused content and forgiving touch targets for a smaller display |
+| Personalization | Window arrangement, panes, toolbar, shortcuts, app settings | Appearance, accessibility, content and notification choices, task-relevant settings |
+| Modality | Prefer modeless panes, inspectors, and separate windows | Use scoped sheets or full-screen flows, with a clear return to the parent |
+| Adaptation | Resizable windows, multiple displays, active/inactive states | Safe areas, text size, keyboard, orientation, and dynamically available scene size |
+
+For Mac-specific composition, controls, Settings, and verification, read [macos-product-language.md](macos-product-language.md). For iPhone-specific navigation, reach, lists, sheets, permissions, and adaptation, read [iphone-ios-product-language.md](iphone-ios-product-language.md). Do not approve a cross-platform design merely because the colors and corner radii match.
+
 ## Start With A Product Thesis
 
 Write a one-sentence internal thesis before styling:
@@ -23,6 +46,8 @@ Write a one-sentence internal thesis before styling:
 Use it to decide what is prominent, quiet, deferred, summarized, or removed. If an element does not support the job, necessary context, trust, or recovery, challenge its place.
 
 Do not confuse “few elements” with simplicity. A short explanation, progress indicator, comparison, or undo action can reduce cognitive work even though it adds UI.
+
+Pair the thesis with a preservation contract: list the product terms, data meaning, defaults, persisted state, platform conventions, brand signals, and safety behavior that the redesign must not alter. Visual work can expose a logic problem, but it must not silently fix product logic outside the requested scope.
 
 ## Establish The Reading Order
 
@@ -50,6 +75,8 @@ Change this sequence when the actual task demands it; never force the template o
 
 | Need | Prefer | Avoid |
 | --- | --- | --- |
+| Navigate to a different place | A link or navigation control with a destination | A button styled like a link with no navigation semantics |
+| Perform an action in the current context | A button named for the result | A link or vague label such as “Continue” when the result is consequential |
 | Choose one of 2–5 short peers | Segmented control or radio group | A dropdown that hides all options |
 | Toggle an immediate setting | Switch with a persistent label | An ambiguous icon-only toggle |
 | Select items for a later action | Checkbox | A switch that implies immediate effect |
@@ -59,8 +86,11 @@ Change this sequence when the actual task demands it; never force the template o
 | Explain specialized terminology | Nearby contextual help | Replacing exact domain language with vague copy |
 | Compare an optimized result | Summary plus baseline/delta and explanation | Showing a changed number without provenance |
 | Present dense expert data | Summary, semantic table, optional compact view | Flattening everything into decorative cards |
+| Confirm a consequential destructive action | Specific action name, consequence, and safe cancel; offer undo when truthful | Generic “Are you sure?”, red decoration without meaning, or a false promise of reversibility |
 
 A control's visual footprint and actual hit target must agree. Use the native element across the full visible target when possible. Keep keyboard focus obvious and labels programmatically associated.
+
+Decide whether a change is immediate or deferred before choosing the control. Immediate settings need visible feedback and truthful persistence state. Deferred edits need an explicit apply/save action, dirty-state handling, and a safe way to cancel without implying that changes already took effect.
 
 ## Use A Three-Layer Surface Model
 
@@ -92,6 +122,17 @@ Prefer the platform system stack or the product's established legible typeface. 
 
 Spacing should reveal relationships. Use tighter gaps inside a group, larger gaps between groups, and consistent insets for comparable surfaces. If a screen feels busy, first remove unnecessary boundaries and repair spacing before muting everything.
 
+## Write For Recognition And Trust
+
+Preserve the product's established voice and exact domain terms. Improve labels by making the result recognizable, not by making every phrase casual.
+
+- Name actions for what they do: “Export CSV” is clearer than “Continue.”
+- Put the label beside the value or control it explains; avoid placeholder-only labels.
+- State errors in terms of what happened, what remains safe, and the next available recovery step.
+- Distinguish estimates, cached values, partial results, and generated suggestions from authoritative facts.
+- When a result changes because of an optimization, filter, or model, retain the baseline, delta, units, and relevant provenance.
+- Use icon-only actions only when the symbol is conventional in this context and an accessible name remains available.
+
 ## Treat Color As Meaning
 
 Define semantic color tokens such as background, content surface, elevated chrome, primary text, secondary text, separator, accent, positive, warning, destructive, focus, and selection. Give light and dark appearances independent values; do not mechanically invert colors.
@@ -112,7 +153,9 @@ Design around content and input constraints rather than device-name breakpoints.
 - Check both sides of each meaningful breakpoint and at least one width between major layouts.
 - Test extreme content: long localized labels, large numbers, empty values, many rows, validation copy, and browser zoom.
 
-For touch-oriented or mixed-input surfaces, aim for 44×44 CSS-pixel targets for primary controls with space between them. For pointer-dominant surfaces, follow the platform's control metrics while retaining visible focus and adequate spacing. Prefer the more forgiving target when one responsive product serves both.
+For a native Apple interface, follow the current platform metrics: Apple's accessibility guidance lists 44×44 points as the default iOS/iPadOS control size and 28×28 points as the default macOS size, with 28×28 and 20×20 points respectively as minimums. Treat minimums as exceptional lower bounds, not goals. For a touch-oriented web surface, a 44×44 CSS-pixel target is a useful baseline when the project has no stronger standard. For pointer-dominant surfaces, retain adequate separation and visible focus. Prefer the more forgiving target when one responsive product genuinely serves both inputs.
+
+Use the project's declared accessibility target. When none exists, state the baseline chosen rather than silently assuming conformance; for a public web product, WCAG 2.2 AA is a practical minimum target. Verify rendered contrast, keyboard operation, focus order and visibility, labels and roles, zoom/reflow, text alternatives, and reduced motion in proportion to the changed surface. Do not claim conformance from linting alone.
 
 ## Use Motion As Feedback
 
@@ -154,6 +197,7 @@ Review the rendered product, not only the source.
 - Is there one visually primary next action?
 - Does secondary configuration remain discoverable without competing?
 - Does the result explain itself, including comparisons or uncertainty?
+- Can the primary journey be completed end to end without relying on hidden context?
 
 ### Familiarity And Agency
 
@@ -161,6 +205,7 @@ Review the rendered product, not only the source.
 - Do equivalent controls behave consistently?
 - Can people undo, cancel, recover, or inspect before consequential actions?
 - Are labels and feedback concise and specific?
+- Are immediate and deferred changes distinguishable, with truthful persistence feedback?
 
 ### Adaptation And Accessibility
 
@@ -198,9 +243,15 @@ Use these as evolving primary references, not as templates to copy:
 
 - [Apple Human Interface Guidelines: Design principles](https://developer.apple.com/design/human-interface-guidelines/design-principles)
 - [Principles of great design, WWDC26](https://developer.apple.com/videos/play/wwdc2026/250/)
+- [Designing for macOS](https://developer.apple.com/design/human-interface-guidelines/designing-for-macos/)
 - [Designing for iOS](https://developer.apple.com/design/human-interface-guidelines/designing-for-ios)
 - [Accessibility](https://developer.apple.com/design/human-interface-guidelines/accessibility)
 - [Layout](https://developer.apple.com/design/human-interface-guidelines/layout)
+- [Windows](https://developer.apple.com/design/human-interface-guidelines/windows)
+- [Settings](https://developer.apple.com/design/human-interface-guidelines/settings)
+- [Toolbars](https://developer.apple.com/design/human-interface-guidelines/toolbars)
+- [Tab bars](https://developer.apple.com/design/human-interface-guidelines/tab-bars)
 - [Materials](https://developer.apple.com/design/human-interface-guidelines/materials)
 - [Typography](https://developer.apple.com/design/human-interface-guidelines/typography)
 - [Motion](https://developer.apple.com/design/human-interface-guidelines/motion)
+- [W3C Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)

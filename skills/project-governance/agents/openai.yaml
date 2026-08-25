@@ -1,3 +1,4 @@
 interface:
   display_name: "Project Governance"
   short_description: "Keep Git, versions, changelogs, and handoffs consistent"
+  default_prompt: "Use $project-governance to audit or establish this project's continuity and release rules without changing Git history unless I explicitly request it."
