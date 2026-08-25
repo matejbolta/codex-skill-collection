@@ -11,9 +11,17 @@ import re
 import subprocess
 import sys
 import tempfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
-import yaml
+try:
+    import yaml
+except ModuleNotFoundError:
+    print(
+        'ERROR: PyYAML is required; install it with '
+        '`python -m pip install "PyYAML>=6,<7"`.',
+        file=sys.stderr,
+    )
+    raise SystemExit(2) from None
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -92,6 +100,22 @@ def validate_manifest(manifest: dict[str, object]) -> None:
         if entry["sha256"] != hashlib.sha256(data).hexdigest():
             raise ValidationError(f"SHA-256 mismatch: {relative}")
 
+    collection_license = manifest.get("collection_license")
+    if collection_license is not None:
+        declared_file(ROOT, collection_license, "collection_license")
+
+
+def declared_file(root: Path, value: object, label: str) -> Path:
+    if not isinstance(value, str) or not value:
+        raise ValidationError(f"{label} must be a non-empty relative path")
+    relative = PurePosixPath(value)
+    if relative.is_absolute() or ".." in relative.parts or relative.as_posix() != value:
+        raise ValidationError(f"{label} must stay inside its declared root")
+    target = root.joinpath(*relative.parts)
+    if not target.is_file():
+        raise ValidationError(f"declared file is missing for {label}: {value}")
+    return target
+
 
 def frontmatter(skill_file: Path) -> dict[str, object]:
     content = skill_file.read_text(encoding="utf-8")
@@ -110,12 +134,13 @@ def frontmatter(skill_file: Path) -> dict[str, object]:
     return payload
 
 
-def validate_skills(manifest: dict[str, object]) -> list[Path]:
+def validate_skills(manifest: dict[str, object]) -> tuple[list[Path], list[str]]:
     raw_skills = manifest.get("skills")
     if not isinstance(raw_skills, list):
         raise ValidationError("manifest skills must be an array")
     declared: set[str] = set()
     test_files: list[Path] = []
+    warnings: list[str] = []
     for raw in raw_skills:
         if not isinstance(raw, dict) or not isinstance(raw.get("name"), str):
             raise ValidationError("every skill manifest entry needs a string name")
@@ -136,8 +161,18 @@ def validate_skills(manifest: dict[str, object]) -> list[Path]:
             or ">" in description
         ):
             raise ValidationError(f"invalid skill description: {name}")
-        if not (root / "LICENSE").is_file():
-            raise ValidationError(f"missing per-skill LICENSE: {name}")
+        license_files = raw.get("license_files")
+        if not isinstance(license_files, list):
+            raise ValidationError(f"license_files must be an array: {name}")
+        seen_license_files: set[str] = set()
+        for index, relative in enumerate(license_files):
+            if isinstance(relative, str) and relative in seen_license_files:
+                raise ValidationError(f"duplicate license_files entry: {name}")
+            declared_file(root, relative, f"{name}.license_files[{index}]")
+            assert isinstance(relative, str)
+            seen_license_files.add(relative)
+        if not license_files:
+            warnings.append(f"{name}: no conventional license file found")
         test_files.extend(sorted(root.glob("tests/test_*.py")))
 
     actual = {
@@ -150,9 +185,7 @@ def validate_skills(manifest: dict[str, object]) -> list[Path]:
             f"skill directory mismatch; undeclared={sorted(actual - declared)}, "
             f"missing={sorted(declared - actual)}"
         )
-    if not (ROOT / "LICENSE").is_file():
-        raise ValidationError("missing collection LICENSE")
-    return test_files
+    return test_files, warnings
 
 
 def validate_python(test_files: list[Path]) -> None:
@@ -179,11 +212,13 @@ def main() -> int:
     try:
         manifest = read_manifest()
         validate_manifest(manifest)
-        tests = validate_skills(manifest)
+        tests, warnings = validate_skills(manifest)
         validate_python(tests)
     except (OSError, UnicodeDecodeError, ValidationError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
+    for warning in warnings:
+        print(f"WARNING: {warning}", file=sys.stderr)
     print(
         f"Validated {len(manifest['skills'])} skills, "
         f"{len(manifest['files'])} payload files, and {len(tests)} test files."

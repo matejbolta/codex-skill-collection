@@ -37,6 +37,9 @@ Pass `--github-ci` for a public GitHub collection. It installs the bundled,
 least-privilege validation workflow, which checks metadata, manifest coverage
 and hashes, Python syntax, and every committed `tests/test_*.py` fixture. The
 workflow installs PyYAML explicitly rather than assuming it exists on a runner.
+For local validation, install `PyYAML>=6,<7` and run
+`python .github/scripts/validate_collection.py` from the collection root; the
+validator reports a concise installation hint when the dependency is absent.
 
 Example:
 
@@ -56,7 +59,7 @@ The output layout is compatible with the bundled GitHub installer:
 codex-skill-collection/
 |-- README.md
 |-- INSTALL_PROMPTS.md
-|-- LICENSE
+|-- LICENSE                 When every skill carries identical license terms
 |-- manifest.json
 |-- .github/
 `-- skills/

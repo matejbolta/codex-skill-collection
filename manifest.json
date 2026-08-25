@@ -1,15 +1,16 @@
 {
   "collection": "Matej's Codex Skill Collection",
+  "collection_license": "LICENSE",
   "files": [
     {
-      "bytes": 7260,
+      "bytes": 8864,
       "path": ".github/scripts/validate_collection.py",
-      "sha256": "027a07a39671567f0f998af34d1946e8834f97429b481ab07dff708dbb23430d"
+      "sha256": "85dec004939f42f5f86e7613da36ec44be08794b176210763323c6b353464e1b"
     },
     {
-      "bytes": 474,
+      "bytes": 560,
       "path": ".github/workflows/validate.yml",
-      "sha256": "22b7a8ebd4dfe23158092f92429b0868e474a2b320a8d4c1f7c2fc76903bf463"
+      "sha256": "dd487bcd4a1184b3e0872828e86c785dedec2f534e43aa839d1d16fc26fe5168"
     },
     {
       "bytes": 33,
@@ -27,9 +28,9 @@
       "sha256": "2a5c78eea163bea7aa62ab3f8fe3efa1fbdc8df6339cb3043e63fcf20a30d2aa"
     },
     {
-      "bytes": 2804,
+      "bytes": 2903,
       "path": "README.md",
-      "sha256": "debced59aaf499332e84e668be3035fd9743bd9d73cb361c04da8cbd694a99fc"
+      "sha256": "ba03b15207de0df505387d7d8f3010bfac4610241da4088f3d9c2d431896a4f6"
     },
     {
       "bytes": 1068,
@@ -237,9 +238,9 @@
       "sha256": "2a5c78eea163bea7aa62ab3f8fe3efa1fbdc8df6339cb3043e63fcf20a30d2aa"
     },
     {
-      "bytes": 4756,
+      "bytes": 5029,
       "path": "skills/skill-publisher/SKILL.md",
-      "sha256": "98417b1971ed5ece1bbc05260465e4eec0c9ee483cb48851840672f79d4261e4"
+      "sha256": "7fa36adaeb0d958dcfd602323dfe2017e736a966625b4718cdea7630d6e50911"
     },
     {
       "bytes": 281,
@@ -247,24 +248,24 @@
       "sha256": "132abe0742054dba95a2f52e8c0dcbbd307bcee398e671527eda0ecf1d935112"
     },
     {
-      "bytes": 474,
+      "bytes": 560,
       "path": "skills/skill-publisher/assets/github/validate.yml",
-      "sha256": "22b7a8ebd4dfe23158092f92429b0868e474a2b320a8d4c1f7c2fc76903bf463"
+      "sha256": "dd487bcd4a1184b3e0872828e86c785dedec2f534e43aa839d1d16fc26fe5168"
     },
     {
-      "bytes": 7260,
+      "bytes": 8864,
       "path": "skills/skill-publisher/assets/github/validate_collection.py",
-      "sha256": "027a07a39671567f0f998af34d1946e8834f97429b481ab07dff708dbb23430d"
+      "sha256": "85dec004939f42f5f86e7613da36ec44be08794b176210763323c6b353464e1b"
     },
     {
-      "bytes": 21127,
+      "bytes": 21322,
       "path": "skills/skill-publisher/scripts/package_skills.py",
-      "sha256": "a7440109945ff3a03cde552892349b3baa2f16caf1b0619c9add09eec6865128"
+      "sha256": "2ee776c591e66921415866fca5bdfc40c8caf6e741fd5f3d6b257617fcafa4da"
     },
     {
-      "bytes": 4771,
+      "bytes": 8832,
       "path": "skills/skill-publisher/tests/test_package_skills.py",
-      "sha256": "966c16c29971c10e8da440144a8e082351aced6dc84ae6b17bd8db3525742fbb"
+      "sha256": "d353caf8e020379c3709a096bb1da6451fb6316600158900899e945830c4ed1f"
     }
   ],
   "github_ci": true,
@@ -539,9 +540,9 @@
           "sha256": "2a5c78eea163bea7aa62ab3f8fe3efa1fbdc8df6339cb3043e63fcf20a30d2aa"
         },
         {
-          "bytes": 4756,
+          "bytes": 5029,
           "path": "SKILL.md",
-          "sha256": "98417b1971ed5ece1bbc05260465e4eec0c9ee483cb48851840672f79d4261e4"
+          "sha256": "7fa36adaeb0d958dcfd602323dfe2017e736a966625b4718cdea7630d6e50911"
         },
         {
           "bytes": 281,
@@ -549,24 +550,24 @@
           "sha256": "132abe0742054dba95a2f52e8c0dcbbd307bcee398e671527eda0ecf1d935112"
         },
         {
-          "bytes": 474,
+          "bytes": 560,
           "path": "assets/github/validate.yml",
-          "sha256": "22b7a8ebd4dfe23158092f92429b0868e474a2b320a8d4c1f7c2fc76903bf463"
+          "sha256": "dd487bcd4a1184b3e0872828e86c785dedec2f534e43aa839d1d16fc26fe5168"
         },
         {
-          "bytes": 7260,
+          "bytes": 8864,
           "path": "assets/github/validate_collection.py",
-          "sha256": "027a07a39671567f0f998af34d1946e8834f97429b481ab07dff708dbb23430d"
+          "sha256": "85dec004939f42f5f86e7613da36ec44be08794b176210763323c6b353464e1b"
         },
         {
-          "bytes": 21127,
+          "bytes": 21322,
           "path": "scripts/package_skills.py",
-          "sha256": "a7440109945ff3a03cde552892349b3baa2f16caf1b0619c9add09eec6865128"
+          "sha256": "2ee776c591e66921415866fca5bdfc40c8caf6e741fd5f3d6b257617fcafa4da"
         },
         {
-          "bytes": 4771,
+          "bytes": 8832,
           "path": "tests/test_package_skills.py",
-          "sha256": "966c16c29971c10e8da440144a8e082351aced6dc84ae6b17bd8db3525742fbb"
+          "sha256": "d353caf8e020379c3709a096bb1da6451fb6316600158900899e945830c4ed1f"
         }
       ],
       "license_files": [

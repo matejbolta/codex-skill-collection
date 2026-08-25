@@ -23,4 +23,4 @@ The collection and every included skill are licensed under the [MIT License](LIC
 
 ## Validation
 
-Pull requests and pushes are checked by the bundled GitHub Actions workflow. It validates skill metadata, manifest coverage and hashes, Python syntax, and the committed regression tests.
+Pull requests and pushes are checked by the bundled GitHub Actions workflow. It validates skill metadata, manifest coverage and hashes, Python syntax, and the committed regression tests. To run it locally, install `PyYAML>=6,<7` and run `python .github/scripts/validate_collection.py`.

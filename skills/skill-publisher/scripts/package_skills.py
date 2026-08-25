@@ -393,7 +393,8 @@ def render_readme(
         "\n## Validation\n\n"
         "Pull requests and pushes are checked by the bundled GitHub Actions workflow. "
         "It validates skill metadata, manifest coverage and hashes, Python syntax, and "
-        "the committed regression tests.\n"
+        "the committed regression tests. To run it locally, install `PyYAML>=6,<7` "
+        "and run `python .github/scripts/validate_collection.py`.\n"
         if github_ci
         else ""
     )
@@ -539,6 +540,7 @@ def main() -> int:
             "repo_url": args.repo_url,
             "ref": args.ref,
             "github_ci": args.github_ci,
+            "collection_license": "LICENSE" if common_license is not None else None,
             "manifest_excludes": ["manifest.json"],
             "files": file_manifest(staged),
             "skills": catalog,

@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Regression tests for deterministic, licensed collection packaging."""
+"""Regression tests for deterministic packaging and generated CI contracts."""
 
 from __future__ import annotations
 
 import hashlib
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -45,6 +46,31 @@ class PackageSkillsTests(unittest.TestCase):
                 "Test Collection",
                 "--github-ci",
             ],
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+        )
+
+    def write_skill(self, root: Path, name: str, license_name: str | None) -> Path:
+        source = root / name
+        source.mkdir()
+        (source / "SKILL.md").write_text(
+            "---\n"
+            f"name: {name}\n"
+            f"description: Use {name} for packaging regression tests.\n"
+            "---\n\n"
+            f"# {name}\n",
+            encoding="utf-8",
+        )
+        if license_name:
+            (source / license_name).write_bytes(LICENSE.read_bytes())
+        return source
+
+    def validate_collection(self, collection: Path) -> subprocess.CompletedProcess[str]:
+        return subprocess.run(
+            [sys.executable, str(collection / ".github/scripts/validate_collection.py")],
+            cwd=collection,
             text=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -92,6 +118,7 @@ class PackageSkillsTests(unittest.TestCase):
             )
             manifest = json.loads((collection / "manifest.json").read_text())
             self.assertTrue(manifest["github_ci"])
+            self.assertEqual(manifest["collection_license"], "LICENSE")
             expected = {entry["path"]: entry for entry in manifest["files"]}
             actual = {
                 path.relative_to(collection).as_posix()
@@ -107,6 +134,69 @@ class PackageSkillsTests(unittest.TestCase):
             refused = self.build(first_parent, source)
             self.assertEqual(refused.returncode, 2)
             self.assertIn("Output already exists", refused.stderr)
+
+    def test_unlicensed_skill_warns_but_generated_ci_is_valid(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = self.write_skill(root, "unlicensed-skill", None)
+            parent = root / "build"
+            parent.mkdir()
+            built = self.build(parent, source)
+            self.assertEqual(built.returncode, 0, built.stderr)
+            self.assertIn("no conventional license file found", built.stdout)
+
+            collection = parent / "collection"
+            manifest = json.loads((collection / "manifest.json").read_text())
+            self.assertIsNone(manifest["collection_license"])
+            self.assertEqual(manifest["skills"][0]["license_files"], [])
+            validated = self.validate_collection(collection)
+            self.assertEqual(validated.returncode, 0, validated.stderr)
+            self.assertIn("no conventional license file found", validated.stderr)
+
+    def test_license_md_is_manifested_and_accepted_by_generated_ci(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = self.write_skill(root, "markdown-license", "LICENSE.md")
+            parent = root / "build"
+            parent.mkdir()
+            built = self.build(parent, source)
+            self.assertEqual(built.returncode, 0, built.stderr)
+
+            collection = parent / "collection"
+            manifest = json.loads((collection / "manifest.json").read_text())
+            self.assertEqual(manifest["collection_license"], "LICENSE")
+            self.assertEqual(manifest["skills"][0]["license_files"], ["LICENSE.md"])
+            self.assertTrue((collection / "LICENSE").is_file())
+            self.assertTrue(
+                (collection / "skills/markdown-license/LICENSE.md").is_file()
+            )
+            validated = self.validate_collection(collection)
+            self.assertEqual(validated.returncode, 0, validated.stderr)
+
+    def test_validator_explains_missing_pyyaml_without_a_traceback(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = self.write_skill(root, "missing-yaml", "LICENSE")
+            parent = root / "build"
+            parent.mkdir()
+            built = self.build(parent, source)
+            self.assertEqual(built.returncode, 0, built.stderr)
+
+            environment = os.environ.copy()
+            environment.pop("PYTHONPATH", None)
+            validator = parent / "collection/.github/scripts/validate_collection.py"
+            completed = subprocess.run(
+                [sys.executable, "-S", str(validator)],
+                cwd=parent / "collection",
+                env=environment,
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+            self.assertEqual(completed.returncode, 2)
+            self.assertIn("PyYAML is required", completed.stderr)
+            self.assertNotIn("Traceback", completed.stderr)
 
     def test_archive_finalization_never_replaces_an_existing_file(self) -> None:
         packager = load_packager()
