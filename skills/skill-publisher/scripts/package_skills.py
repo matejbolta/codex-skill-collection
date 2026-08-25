@@ -88,6 +88,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--title", default="Codex Skill Collection", help="Collection title."
     )
+    parser.add_argument(
+        "--github-ci",
+        action="store_true",
+        help="Include the bundled GitHub Actions validation workflow.",
+    )
     return parser.parse_args()
 
 
@@ -263,6 +268,32 @@ def file_manifest(root: Path) -> list[dict[str, str | int]]:
     return files
 
 
+def shared_license_content(audits: list[SkillAudit]) -> bytes | None:
+    """Return one common license only when every skill carries identical terms."""
+    contents: list[bytes] = []
+    for audit in audits:
+        if len(audit.license_files) != 1:
+            return None
+        contents.append((audit.source / audit.license_files[0]).read_bytes())
+    if not contents or any(content != contents[0] for content in contents[1:]):
+        return None
+    return contents[0]
+
+
+def copy_github_ci(staged: Path) -> None:
+    asset_root = Path(__file__).resolve().parent.parent / "assets" / "github"
+    workflow = asset_root / "validate.yml"
+    validator = asset_root / "validate_collection.py"
+    if not workflow.is_file() or not validator.is_file():
+        raise PackageError("Bundled GitHub CI assets are missing")
+    workflow_target = staged / ".github" / "workflows" / "validate.yml"
+    script_target = staged / ".github" / "scripts" / "validate_collection.py"
+    workflow_target.parent.mkdir(parents=True, exist_ok=True)
+    script_target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(workflow, workflow_target)
+    shutil.copy2(validator, script_target)
+
+
 def validate_render_inputs(repo_url: str, ref: str, title: str) -> str:
     if not title or title != title.strip() or any(ord(char) < 32 for char in title):
         raise PackageError("Title must be one non-empty printable line")
@@ -326,18 +357,45 @@ def render_prompts(
 
 
 def render_readme(
-    title: str, skills: list[dict[str, object]], repo_url: str, ref: str
+    title: str,
+    skills: list[dict[str, object]],
+    repo_url: str,
+    ref: str,
+    shared_license_label: str | None,
+    github_ci: bool,
 ) -> str:
     catalog = "\n".join(
         f"- **${skill['name']}** — {skill['description']}" for skill in skills
     )
     unlicensed = [str(skill["name"]) for skill in skills if not skill["license_files"]]
-    licensing = (
-        "No conventional license file was found for: "
-        + ", ".join(f"`${name}`" for name in unlicensed)
-        + ". Installation access does not itself grant broader reuse or redistribution rights."
-        if unlicensed
-        else "License files are recorded per skill in `manifest.json`; review their terms before redistribution."
+    if shared_license_label == "MIT License":
+        licensing = (
+            "The collection and every included skill are licensed under the "
+            "[MIT License](LICENSE)."
+        )
+    elif shared_license_label:
+        licensing = (
+            "The collection-level [LICENSE](LICENSE) and every included skill carry "
+            "identical license terms."
+        )
+    elif unlicensed:
+        licensing = (
+            "No conventional license file was found for: "
+            + ", ".join(f"`${name}`" for name in unlicensed)
+            + ". Installation access does not itself grant broader reuse or redistribution rights."
+        )
+    else:
+        licensing = (
+            "License files are recorded per skill in `manifest.json`; review their "
+            "terms before redistribution."
+        )
+    validation = (
+        "\n## Validation\n\n"
+        "Pull requests and pushes are checked by the bundled GitHub Actions workflow. "
+        "It validates skill metadata, manifest coverage and hashes, Python syntax, and "
+        "the committed regression tests.\n"
+        if github_ci
+        else ""
     )
     return (
         f"# {title}\n\n"
@@ -352,6 +410,7 @@ def render_readme(
         "become available on the next Codex turn.\n\n"
         "## Licensing note\n\n"
         f"{licensing}\n"
+        f"{validation}"
     )
 
 
@@ -371,6 +430,15 @@ def write_archive(collection: Path, archive: Path, root_name: str) -> None:
             mode = stat.S_IMODE(path.stat().st_mode)
             info.external_attr = ((stat.S_IFREG | mode) & 0xFFFF) << 16
             bundle.writestr(info, path.read_bytes())
+
+
+def finalize_archive(temporary_archive: Path, archive: Path) -> None:
+    """Atomically publish an archive without replacing a concurrently created file."""
+    try:
+        os.link(temporary_archive, archive)
+    except FileExistsError as exc:
+        raise PackageError(f"Archive already exists: {archive}") from exc
+    temporary_archive.unlink()
 
 
 def validate_destination_paths(
@@ -410,6 +478,13 @@ def main() -> int:
         names.add(audit.name)
         audits.append(audit)
 
+    common_license = shared_license_content(audits)
+    common_license_label = (
+        "MIT License"
+        if common_license and common_license.startswith(b"MIT License\n")
+        else None
+    )
+
     output.parent.mkdir(parents=True, exist_ok=True)
     if archive:
         archive.parent.mkdir(parents=True, exist_ok=True)
@@ -417,6 +492,7 @@ def main() -> int:
     staged = temporary_root / output.name
     temporary_archive: Path | None = None
     output_finalized = False
+    archive_finalized = False
     try:
         skill_root = staged / "skills"
         skill_root.mkdir(parents=True)
@@ -435,8 +511,20 @@ def main() -> int:
                 }
             )
 
+        if common_license is not None:
+            (staged / "LICENSE").write_bytes(common_license)
+        if args.github_ci:
+            copy_github_ci(staged)
+
         (staged / "README.md").write_text(
-            render_readme(args.title, catalog, args.repo_url, args.ref),
+            render_readme(
+                args.title,
+                catalog,
+                args.repo_url,
+                args.ref,
+                common_license_label or ("Shared license" if common_license else None),
+                args.github_ci,
+            ),
             encoding="utf-8",
         )
         (staged / "INSTALL_PROMPTS.md").write_text(
@@ -450,6 +538,7 @@ def main() -> int:
             "collection": args.title,
             "repo_url": args.repo_url,
             "ref": args.ref,
+            "github_ci": args.github_ci,
             "manifest_excludes": ["manifest.json"],
             "files": file_manifest(staged),
             "skills": catalog,
@@ -470,10 +559,11 @@ def main() -> int:
         os.replace(staged, output)
         output_finalized = True
         if archive and temporary_archive:
-            os.replace(temporary_archive, archive)
+            finalize_archive(temporary_archive, archive)
             temporary_archive = None
+            archive_finalized = True
     except Exception:
-        if output_finalized and output.exists() and archive and not archive.exists():
+        if output_finalized and output.exists() and archive and not archive_finalized:
             shutil.rmtree(output)
         raise
     finally:

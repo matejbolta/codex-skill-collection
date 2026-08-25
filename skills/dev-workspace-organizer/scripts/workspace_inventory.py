@@ -216,9 +216,15 @@ def inventory(
     if final_collisions:
         warnings.append("one or more category paths collide with non-directories")
 
+    nested_repository_details = find_git_roots(root)
     action_key = "would_create" if dry_run else "created"
     return {
+        "schema_version": 2,
         "root": str(root),
+        # Schema-1 compatibility aliases. Keep these stable for existing JSON
+        # consumers while the more precise before/after fields carry v2 detail.
+        "root_exists": root.exists(),
+        "root_git": root_repository,
         "root_existed_before": root_existed,
         "root_exists_after": root.exists(),
         "root_repository": root_repository,
@@ -230,7 +236,10 @@ def inventory(
         "other_directories": other_directories,
         "top_level_files": top_level_files,
         "top_level_symlinks": symlinks,
-        "nested_repositories": find_git_roots(root),
+        "nested_repositories": [
+            item["path"] for item in nested_repository_details
+        ],
+        "nested_repository_details": nested_repository_details,
         "would_create_root" if dry_run else "root_created": (
             init and not root_existed if dry_run else root_created
         ),
@@ -253,7 +262,7 @@ def print_human(report: dict[str, object]) -> None:
         "other_directories",
         "top_level_files",
         "top_level_symlinks",
-        "nested_repositories",
+        "nested_repository_details",
         "warnings",
     ):
         values = report[key]

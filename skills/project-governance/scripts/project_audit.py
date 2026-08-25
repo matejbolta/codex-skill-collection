@@ -31,7 +31,10 @@ ENTRY_FIELDS = {
     "version_source",
     "require_current_tag",
 }
+CURRENT_INVENTORY_SCHEMA = 2
+SUPPORTED_INVENTORY_SCHEMAS = {1, CURRENT_INVENTORY_SCHEMA}
 EXAMPLE_INVENTORY = {
+    "schema_version": CURRENT_INVENTORY_SCHEMA,
     "projects": [
         {
             "name": "example-app",
@@ -171,9 +174,35 @@ def validate_version_source(value: Any, label: str) -> str | None:
     return path.as_posix()
 
 
+def inventory_schema(payload: Any) -> int:
+    if not isinstance(payload, dict):
+        raise InventoryError("inventory must be an object")
+    unknown = sorted(set(payload) - {"schema_version", "projects"})
+    if unknown:
+        raise InventoryError(
+            f"inventory has unknown top-level field(s): {', '.join(unknown)}"
+        )
+    raw_schema = payload.get("schema_version", 1)
+    if isinstance(raw_schema, bool) or not isinstance(raw_schema, int):
+        raise InventoryError("inventory.schema_version must be an integer")
+    if raw_schema not in SUPPORTED_INVENTORY_SCHEMAS:
+        raise InventoryError(
+            f"unsupported inventory schema_version {raw_schema}; "
+            f"supported versions are {sorted(SUPPORTED_INVENTORY_SCHEMAS)}"
+        )
+    return raw_schema
+
+
+def default_release_policy(schema: int, management: str, kind: str) -> str:
+    if schema == 1 and management == "managed" and kind == "software":
+        return "semver"
+    return "none"
+
+
 def validate_inventory(payload: Any, base: Path) -> list[dict[str, Any]]:
-    if not isinstance(payload, dict) or set(payload) != {"projects"}:
-        raise InventoryError("inventory must be an object containing only 'projects'")
+    schema = inventory_schema(payload)
+    if "projects" not in payload:
+        raise InventoryError("inventory must contain 'projects'")
     projects = payload["projects"]
     if not isinstance(projects, list):
         raise InventoryError("inventory.projects must be an array")
@@ -202,7 +231,14 @@ def validate_inventory(payload: Any, base: Path) -> list[dict[str, Any]]:
 
         management = raw.get("management", "managed")
         kind = raw.get("kind", "software")
-        release_policy = raw.get("release_policy", "none")
+        if schema == CURRENT_INVENTORY_SCHEMA and "release_policy" not in raw:
+            raise InventoryError(
+                f"{label}.release_policy is required by schema_version "
+                f"{CURRENT_INVENTORY_SCHEMA}"
+            )
+        release_policy = raw.get(
+            "release_policy", default_release_policy(schema, management, kind)
+        )
         if management not in MANAGEMENT_VALUES:
             raise InventoryError(f"{label}.management must be one of {sorted(MANAGEMENT_VALUES)}")
         if kind not in KIND_VALUES:

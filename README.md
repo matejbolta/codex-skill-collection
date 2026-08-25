@@ -19,4 +19,8 @@ The bundled installer refuses to replace an existing destination. Installed skil
 
 ## Licensing note
 
-No conventional license file was found for: `$apple-inspired-product-ui`, `$browser-visual-qa`, `$dev-workspace-organizer`, `$github-safe-publish`, `$project-governance`, `$skill-publisher`. Installation access does not itself grant broader reuse or redistribution rights.
+The collection and every included skill are licensed under the [MIT License](LICENSE).
+
+## Validation
+
+Pull requests and pushes are checked by the bundled GitHub Actions workflow. It validates skill metadata, manifest coverage and hashes, Python syntax, and the committed regression tests.

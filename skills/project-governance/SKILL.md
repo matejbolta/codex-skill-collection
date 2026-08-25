@@ -19,7 +19,9 @@ explicitly concerns project setup, continuity, governance, or a release.
 - **Audit:** read `references/project-standard.md` and
   `references/inventory-schema.md`, then use `scripts/project_audit.py` for an
   explicit inventory when it fits. Keep the audit read-only and distinguish a
-  repository's own conventions from actual inconsistencies.
+  repository's own conventions from actual inconsistencies. Preserve schema 1
+  release semantics when reading an existing inventory; use explicit
+  `release_policy` values in schema 2.
 - **Migration:** inspect the repository, history, ignore policy, release model,
   and tracked/local status of governance files, then propose the exact changes
   before applying a broad standard. Never standardize an established repository

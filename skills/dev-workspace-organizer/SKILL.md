@@ -24,6 +24,11 @@ python3 scripts/workspace_inventory.py /path/to/development --init
 
 `--init` creates missing category directories only. It never moves content, initializes Git, or writes project files.
 
+JSON reports use `schema_version: 2`. The legacy `root_exists`, `root_git`, and
+string-valued `nested_repositories` fields remain available; v2 adds precise
+before/after state and `nested_repository_details` without silently changing
+those existing field types.
+
 ## Preserve repository boundaries
 
 - A grouping workspace is not itself a project. Never initialize Git at a root containing independent projects.

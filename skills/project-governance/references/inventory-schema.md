@@ -1,7 +1,7 @@
 # Project audit inventory
 
 Read this reference before using `scripts/project_audit.py`. The audit is
-read-only and accepts one JSON inventory.
+read-only and accepts one versioned JSON inventory.
 
 ## Example
 
@@ -10,6 +10,7 @@ example. The top level is an object with a `projects` array:
 
 ```json
 {
+  "schema_version": 2,
   "projects": [
     {
       "name": "example-app",
@@ -31,6 +32,17 @@ example. The top level is an object with a `projects` array:
 }
 ```
 
+`schema_version` may be `1` or `2`. A missing version is treated as legacy
+schema 1 so existing inventories continue to work. Schema 1 preserves the old
+meaning of managed software entries: when `release_policy` is absent, they use
+`semver`; all other entries use `none`.
+
+Schema 2 requires an explicit `release_policy` on every entry. Use schema 2 for
+new inventories so release checks can never be weakened by an omitted field.
+Migrate a schema 1 inventory by adding `release_policy: "semver"` to software
+projects that already use versions and changelogs, `release_policy: "none"` to
+entries that intentionally do not, and then changing `schema_version` to `2`.
+
 Relative `path` values resolve against the directory containing the inventory,
 not the shell's current directory. Home-relative paths beginning with `~` and
 absolute paths are supported.
@@ -43,7 +55,7 @@ absolute paths are supported.
 | `name` | string | no | Report label; defaults to the path's final component. Names must be unique. |
 | `management` | string | no | `managed` (default), `grouping`, `upstream`, or `empty`. |
 | `kind` | string | no | `software` (default) or `records`. |
-| `release_policy` | string | no | `none` (default) or `semver`. Only `semver` requires version/changelog checks. |
+| `release_policy` | string | schema 2: yes; schema 1: no | `none` or `semver`. Only `semver` requires version/changelog checks. |
 | `version_source` | string | no | Canonical relative version file for a project with multiple independent products. |
 | `require_current_tag` | boolean | no | When true, require local tag `v<canonical-version>`; valid only with `release_policy: semver`. |
 

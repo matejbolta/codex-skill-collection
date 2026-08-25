@@ -31,7 +31,12 @@ Generated caches such as `.DS_Store`, `.git`, `__pycache__`, `.pytest_cache`, an
 
 ## Build The Collection
 
-Use `scripts/package_skills.py` for repeatable packaging. It refuses to overwrite or nest outputs, resolves a symlinked top-level skill argument, rejects every nested symlink, detects common machine-specific paths and credential assignments, excludes generated caches, records licensing warnings, hashes the complete collection payload, and generates recipient prompts. Collection and archive files are built in temporary sibling paths before finalization.
+Use `scripts/package_skills.py` for repeatable packaging. It refuses to overwrite or nest outputs, resolves a symlinked top-level skill argument, rejects every nested symlink, detects common machine-specific paths and credential assignments, excludes generated caches, records licensing warnings, hashes the complete collection payload, and generates recipient prompts. Collection and archive files are built in temporary sibling paths before finalization. When every skill carries one identical conventional license, the packager also emits that license at the collection root.
+
+Pass `--github-ci` for a public GitHub collection. It installs the bundled,
+least-privilege validation workflow, which checks metadata, manifest coverage
+and hashes, Python syntax, and every committed `tests/test_*.py` fixture. The
+workflow installs PyYAML explicitly rather than assuming it exists on a runner.
 
 Example:
 
@@ -40,6 +45,7 @@ python3 scripts/package_skills.py \
   --output /path/to/codex-skill-collection \
   --archive /path/to/codex-skill-collection.zip \
   --repo-url https://github.com/OWNER/REPO \
+  --github-ci \
   --skill ~/.codex/skills/example-one \
   --skill ~/.codex/skills/example-two
 ```
@@ -50,7 +56,9 @@ The output layout is compatible with the bundled GitHub installer:
 codex-skill-collection/
 |-- README.md
 |-- INSTALL_PROMPTS.md
+|-- LICENSE
 |-- manifest.json
+|-- .github/
 `-- skills/
     |-- example-one/
     `-- example-two/
