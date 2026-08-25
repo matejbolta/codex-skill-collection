@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dev Workspace Organizer"
+  short_description: "Organize multi-project development workspaces"
+  default_prompt: "Use $dev-workspace-organizer to design or safely reorganize my development workspace."

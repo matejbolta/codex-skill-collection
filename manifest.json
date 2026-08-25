@@ -43,6 +43,60 @@
       "path": "skills/browser-visual-qa"
     },
     {
+      "description": "Plan, initialize, or safely reorganize a multi-project development workspace into durable top-level categories without crossing repository boundaries. Use for layouts such as projects, tools, experiments, skills, and misc; do not use for one repository's internal structure.",
+      "files": [
+        {
+          "bytes": 3781,
+          "path": "SKILL.md",
+          "sha256": "ca7e7169ea1f05cdfe7574e6e06c1fb7fe2a31ef4a7942d9f5a3f82dd4315fe6"
+        },
+        {
+          "bytes": 228,
+          "path": "agents/openai.yaml",
+          "sha256": "eb3fdcc2d0957eb5bd18ab0b26a0d1e28fe0576916460696230dde43ef34bfb0"
+        },
+        {
+          "bytes": 3232,
+          "path": "references/layout-pattern.md",
+          "sha256": "150f7407cce2f26f0bd2a36cd12b91ec4de900fa26ec9bb136112614dfd9a2b5"
+        },
+        {
+          "bytes": 5941,
+          "path": "scripts/workspace_inventory.py",
+          "sha256": "a7898ad4683db49b5a48d9d4faa5917adc903e2c022410ebba2a1d33a5c8fce8"
+        }
+      ],
+      "name": "dev-workspace-organizer",
+      "path": "skills/dev-workspace-organizer"
+    },
+    {
+      "description": "Audit a local Git repository for secrets, personal data, risky history, and publication readiness, then create and push a GitHub remote only with explicit authorization. Use for first publication or a deliberate privacy/security review; do not use for routine pushes to an already-reviewed remote.",
+      "files": [
+        {
+          "bytes": 4598,
+          "path": "SKILL.md",
+          "sha256": "b95186e1fc78e4f4b0bb748ed2f5d3c1d6f964b8791566d12d053e1f58ba2de6"
+        },
+        {
+          "bytes": 231,
+          "path": "agents/openai.yaml",
+          "sha256": "fa2da0c37f3aaa7f97738fa6169976e23e39f0499ac1c32676b73ab86fcf7cac"
+        },
+        {
+          "bytes": 6300,
+          "path": "references/security-review.md",
+          "sha256": "1c89a5178c8dd332fb4977b58574efcb80550c823af15c05106ee94f155fb37b"
+        },
+        {
+          "bytes": 15704,
+          "path": "scripts/prepublish_audit.py",
+          "sha256": "3d6b6febd17c1f9591e06328f52accac988bc97754afa743109ff32a57307278"
+        }
+      ],
+      "name": "github-safe-publish",
+      "path": "skills/github-safe-publish"
+    },
+    {
       "description": "Set up a previously untracked project, explicitly audit or migrate Git governance, create or repair a durable project-continuity system, or prepare an explicit release/version. Do not use for ordinary implementation, bug fixes, explanations, or routine task completion.",
       "files": [
         {
