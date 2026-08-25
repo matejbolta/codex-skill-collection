@@ -1,4 +1,4 @@
 interface:
   display_name: "GitHub Safe Publish"
   short_description: "Audit privacy and safely publish to GitHub"
-  default_prompt: "Use $github-safe-publish to audit this repository and safely prepare it for GitHub publication."
+  default_prompt: "Use $github-safe-publish to audit the exact refs in this repository and prepare a publication plan without pushing until authorized."

@@ -31,6 +31,8 @@ This is a navigation system, not a package convention. The grouping folders norm
 
 Omit empty categories that are unlikely to be used. Add a new category only when several items share a stable role, security boundary, or retrieval pattern.
 
+Before creating a category, confirm that its path is absent or already a real directory. A same-named file or symlink is a collision, not an existing category. Do not silently rename either side.
+
 ## Classification questions
 
 Use these in order:
@@ -48,6 +50,7 @@ Names alone are weak evidence. Inspect a repository's README, manifest, remote, 
 - Keep each independent repository intact, including ignored and untracked local state.
 - Never make the grouping root a monorepo unless the user is deliberately converting ownership and history, not merely tidying folders.
 - A Git worktree may use a `.git` file that points elsewhere. Moving only one side can break it.
+- A directory can also be owned by a repository above the proposed workspace root. Resolve the containing Git top level before treating the workspace as an independent grouping root.
 - Submodules, local path dependencies, editor workspaces, shell aliases, launch agents, CI scripts, databases, and browser-extension loaders may contain absolute paths.
 - Symlinks can point outside the workspace. Resolve and report them before moving their parent.
 - Do not merge two same-named destinations or silently invent suffixes.
@@ -57,3 +60,19 @@ Names alone are weak evidence. Inspect a repository's README, manifest, remote, 
 For a new workspace, create the chosen empty grouping directories and start projects in the right place as they arise.
 
 For an existing workspace, the safest good outcome may be an inventory plus a small number of high-confidence moves. Aesthetic consistency alone is not enough reason to disturb active repositories.
+
+## Move-plan contract
+
+For each proposed move, record:
+
+1. resolved source and destination paths, with collision status;
+2. whether the item is an independent repository, linked worktree, submodule,
+   parent-owned directory, symlink, or ordinary directory;
+3. dirty/untracked/ignored state and any local-only data that must remain intact;
+4. remotes, worktree links, submodules, local dependencies, editor workspaces,
+   launchers, loaders, CI, and other path consumers that can break;
+5. whether source and destination share a filesystem;
+6. verification from the destination and a recoverable rollback path.
+
+Do not use a broad move command for a plan containing several repositories.
+Execute and verify one authorized unit at a time.

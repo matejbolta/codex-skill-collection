@@ -27,7 +27,14 @@ For first publication, read [references/security-review.md](references/security-
 python3 scripts/prepublish_audit.py /path/to/repository --history-scope head
 ```
 
-Use `--history-scope all` when the user intends to publish every branch or tag. Review findings rather than treating a zero exit as proof of safety; no pattern scanner can establish absence of secrets or personal information.
+For an exact multi-ref push, name every branch or tag:
+
+```sh
+python3 scripts/prepublish_audit.py /path/to/repository \
+  --history-scope exact --ref main --ref v1.0.0
+```
+
+Use `--history-scope all` only when every local ref is intentionally in scope. The path must be the repository root; the helper refuses a subdirectory rather than silently widening the audit. Exit `0` is clean by this heuristic, `1` needs review, `3` is blocked, and `2` means the audit itself failed. Review the report rather than treating a clean exit as proof of safety; no pattern scanner can establish absence of secrets or personal information.
 
 Inspect at least:
 
@@ -53,9 +60,9 @@ Use a dedicated secret scanner with redacted output when one is already availabl
 
 1. Inspect the authenticated GitHub identity without displaying tokens. Check whether the exact repository already exists; never overwrite or repurpose it silently.
 2. Review every Git-visible change and the staged diff. Commit only when explicitly authorized, keeping unrelated visible changes within the user's stated scope.
-3. Create the repository with the chosen visibility and no invented license. Use the narrowest credentials and permissions available.
+3. Create an empty repository with the chosen visibility and no invented README, `.gitignore`, or license unless hosted initialization was explicitly requested. Use the narrowest credentials and permissions available.
 4. Add a resolved remote URL without embedded credentials. Push only the authorized branch; do not add `--all`, `--mirror`, `--tags`, or force options by default.
-5. Verify the remote visibility, default branch, HEAD SHA, published file set, and repository URL. For public software, review GitHub security features and add `SECURITY.md` when the project has a real vulnerability-reporting channel.
+5. Verify the remote visibility, default branch, authorized ref SHAs, published file set, and repository URL. Do not enable Pages/Actions, create releases, publish packages, add access, or change unrelated security settings without authorization. For public software, review GitHub security features and add `SECURITY.md` only when the project has a real vulnerability-reporting channel.
 6. Report exactly what was published, what checks ran, remaining review items, and any security settings the user must decide.
 
 Stop when ownership, visibility, a suspicious finding, an existing remote, a history rewrite, a force push, or access-control change requires user judgment.

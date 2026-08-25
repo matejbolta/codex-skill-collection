@@ -4,4 +4,7 @@
 the documented baseline; expand it with the product purpose, setup, usage, and
 verification commands as those facts are confirmed from the implementation.
 
-See `docs/HANDOFF.md` for takeover context.
+Current version: `{{VERSION}}`.
+
+See `docs/HANDOFF.md` for takeover context and `CHANGELOG.md` for notable
+versioned changes.

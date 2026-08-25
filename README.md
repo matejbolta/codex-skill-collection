@@ -4,7 +4,7 @@ A portable collection of personal Codex skills. Each skill is self-contained und
 
 ## Skills
 
-- **$apple-inspired-product-ui** — Design or refine product interfaces with Apple-inspired hierarchy, familiarity, restraint, responsive craft, and accessibility. Use for UI/UX implementation or redesign when a calm Apple-platform feel is desired; do not use for copying Apple product trade dress or generic brand-identity work.
+- **$apple-inspired-product-ui** — Review, specify, or refine macOS, iPhone/iOS, or cross-platform product interfaces with Apple-inspired hierarchy, platform-native behavior, restraint, adaptive craft, and accessibility. Use when Apple-platform design discipline or a Mac- or iPhone-appropriate interaction model is desired; do not use to copy Apple trade dress or for generic brand-identity work.
 - **$browser-visual-qa** — Visually inspect, test, and iterate on browser-rendered interfaces in a real browser. Use for UI/UX implementation or review, layout and styling changes, responsive behavior, browser-extension pages, interaction states, and local web-app visual verification; do not use for backend-only or otherwise nonvisual work.
 - **$dev-workspace-organizer** — Plan, initialize, or safely reorganize a multi-project development workspace into durable top-level categories without crossing repository boundaries. Use for layouts such as projects, tools, experiments, skills, and misc; do not use for one repository's internal structure.
 - **$github-safe-publish** — Audit a local Git repository for secrets, personal data, risky history, and publication readiness, then create and push a GitHub remote only with explicit authorization. Use for first publication or a deliberate privacy/security review; do not use for routine pushes to an already-reviewed remote.
@@ -19,4 +19,8 @@ The bundled installer refuses to replace an existing destination. Installed skil
 
 ## Licensing note
 
-No license has been selected for this collection. Installation access does not itself grant broader reuse or redistribution rights.
+The collection and every included skill are licensed under the [MIT License](LICENSE).
+
+## Validation
+
+Pull requests and pushes are checked by the bundled GitHub Actions workflow. It validates skill metadata, manifest coverage and hashes, Python syntax, and the committed regression tests.

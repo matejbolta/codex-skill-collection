@@ -15,6 +15,8 @@ The material that crosses the boundary is not just the current directory. It may
 
 Choose the refs first, then audit the exact reachable set. Do not use `--all`, `--mirror`, or `--tags` for convenience.
 
+The helper's `head` scope means `HEAD` and its ancestors. `exact` means the union of the explicitly repeated `--ref` values. `all` means every local ref visible to `git rev-list --all`, which can include more than local branches and tags. `none` skips history and is appropriate only when no existing commit will cross the boundary.
+
 ## Local review layers
 
 ### Repository boundary
@@ -22,6 +24,7 @@ Choose the refs first, then audit the exact reachable set. Do not use `--all`, `
 - Resolve `git rev-parse --show-toplevel` and confirm it is the intended project, not a directory grouping several repositories.
 - Inspect nested `.git` markers, worktrees, submodules, symlinks, and LFS configuration.
 - Review existing remotes for the correct owner and ensure URLs contain no embedded credentials.
+- Supply the repository root to the audit helper. If a subdirectory resolves to a larger repository, rerun deliberately at the reported root instead of accepting an implicit scope expansion.
 
 ### File and state inventory
 
@@ -64,6 +67,8 @@ Do not choose a license on the owner's behalf. A public repository without a lic
 
 Review the configured Git author email and existing commit history before publication. If privacy matters, let the owner choose a GitHub `noreply` address for future commits and decide whether old history justifies rewriting.
 
+For first publication, create an empty hosted repository unless the owner explicitly requests GitHub-generated starter content. A hosted README, ignore file, or license creates unrelated history and can cause an avoidable merge or force-push decision.
+
 Authoritative guidance:
 
 - [GitHub: Setting repository visibility](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility)
@@ -81,7 +86,7 @@ Verify the remote SHA, visibility, default branch, files, releases, and Pages/Ac
 - a `SECURITY.md` with a real private reporting route;
 - minimal Actions permissions, pinned third-party actions, and protected environments where applicable.
 
-GitHub recommends Dependabot alerts, secret scanning, push protection, and code scanning as baseline public-repository security features. Availability differs for private repositories and account plans; verify current settings rather than assuming they are enabled.
+Review Dependabot, secret scanning, push protection, and code scanning as separate current settings. Availability and defaults differ by visibility, account plan, organization policy, and user-level protection; verify rather than assuming a feature is enabled.
 
 - [GitHub: Security and analysis settings](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-security-and-analysis-settings-for-your-repository)
 - [GitHub: Adding a security policy](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/configure-vulnerability-reporting/add-security-policy)

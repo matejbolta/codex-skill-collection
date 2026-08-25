@@ -1,0 +1,21 @@
+name: Validate collection
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - name: Install validator dependency
+        run: python -m pip install "PyYAML>=6,<7"
+      - name: Validate skills, manifest, scripts, and tests
+        run: python .github/scripts/validate_collection.py
